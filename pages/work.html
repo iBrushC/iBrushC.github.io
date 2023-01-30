@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Website</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navigation-bar">
+        <ul class="navigation-links">
+            <li><a class="selected" href="work.html">Work</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about-contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Page -->
+    <div class="page-block">
+        <div class="main-text-container">
+            <h1 class="big-text">Check out some of my work</h1>
+        </div>
+    </div>
+
+    <!-- Plexus Canvas -->
+    <div class="fullscreen-canvas-container">
+        <canvas class="lorenz-canvas" id="lorenz">Canvases are not supported on this browser</canvas>
+        <script src="../javascript/lorenz.js"></script>
+    </div>
+
+    <!-- About Section -->
+    <div class="page-block">
+        <div class="work-container">
+            <div class="work-row">
+                <h1 class="big-text">My Work</h1>
+            </div>
+            <br>
+            <br>
+            <div class="work-row">
+                <a class="content-box" href="https://www.kitware.com/introducing-physically-based-rendering-to-vtk-js-webgpu/">
+                    <p class="content-title">Physically Based Rendering At Kitware</p>
+                    <img class="content-thumbnail" src="https://www.kitware.com/main/wp-content/uploads/2022/08/fig1-1-1024x687.png">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #989758;">JavaScript</p>
+                        <p class="content-tag" style="background-color: #2065ba;">WebGPU</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://github.com/iBrushC/animextras">
+                    <p class="content-title">Blender Onion Skinning (AnimExtras)</p>
+                    <img class="content-thumbnail" src="https://raw.githubusercontent.com/wiki/schroef/animextras/images/anmx-v112.jpg?2021-04-21.2">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #4B8BBE;">Python</p>
+                        <p class="content-tag" style="background-color: #EA7600;">Blender</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://www.shadertoy.com/view/dtXSzB">
+                    <p class="content-title">Non-Spherical Black Hole Rendering</p>
+                    <img class="content-thumbnail" src="/media/images/BlackHole.PNG">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #744747;">GLSL</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://github.com/iBrushC/lorenz-attractor">
+                    <p class="content-title">3D Chaos Simulator</p>
+                    <img class="content-thumbnail" src="https://raw.githubusercontent.com/iBrushC/lorenz-attractor/main/media/fig1.PNG">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #575e61;">C</p>
+                    </div>
+                </a>
+            </div>
+            <div class="work-row">
+                <a class="content-box" href="https://www.instagram.com/andrewmcombs/">
+                    <p class="content-title">3D Art Portfolio</p>
+                    <img class="content-thumbnail" src="/media/images/TrainstationFinal.png">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #EA7600;">Blender</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://github.com/Traptricker/DCS_Terminal">
+                    <p class="content-title">Datacamp Solver Terminal</p>
+                    <img class="content-thumbnail" src="https://user-images.githubusercontent.com/85963782/159138939-da3297be-6b28-4287-b24e-da1e4530ff11.jpg">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #4B8BBE;">Python</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://www.shadertoy.com/view/Nd2BWt">
+                    <p class="content-title">Shader Fractal Explorer</p>
+                    <img class="content-thumbnail" src="/media/images/JuliaSet.png">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #744747;">GLSL</p>
+                    </div>
+                </a>
+                <a class="content-box" href="https://github.com/iBrushC/ti-open-arcade">
+                    <p class="content-title">TI-84 Game Collection</p>
+                    <img class="content-thumbnail" src="https://raw.githubusercontent.com/iBrushC/ti-open-arcade/main/ti84_breakout_b/media/screenshot1.png">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #575e61;">C</p>
+                    </div>
+                </a>
+            </div>
+            <div class="work-row">
+                <a class="content-box" href="https://github.com/iBrushC/image_to_bitmap">
+                    <p class="content-title">Image To Bitmap Converter</p>
+                    <img class="content-thumbnail" src="https://raw.githubusercontent.com/iBrushC/image_to_bitmap/main/examples/software_example_1.PNG">
+                    <div class="content-tag-container">
+                        <p class="content-tag" style="background-color: #4B8BBE;">Python</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="page-block">
+        <div class="footer-container">
+            <div class="social-link">
+                <div>
+                    <a href="https://www.instagram.com/andrewmcombs/">
+                        <img src="/media/images/instagram.png">
+                    </a>
+                    <p>instagram.com/andrewmcombs</p>
+                </div>
+            </div>
+            <div class="social-link">
+                <div>
+                    <a href="https://github.com/iBrushC">
+                        <img src="/media/images/github.png">
+                    </a>
+                    <p>github.com/iBrushC</p>
+                </div>
+            </div>
+            <div class="social-link">
+                <div>
+                    <a href="mailto:mrandrewmcombs@gmail.com">
+                        <img src="/media/images/mail.png">
+                    </a>
+                    <p>mrandrewmcombs@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
