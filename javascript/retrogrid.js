@@ -1,5 +1,5 @@
-const GRID_X = 12;
-const GRID_Z = 12;
+const GRID_X = 10;
+const GRID_Z = 10;
 const PARTICLE_SIZE = 2;
 
 const FOG_DISTANCE = 2;

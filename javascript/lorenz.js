@@ -1,4 +1,4 @@
-const MAX_PARTICLES = 2500;
+const MAX_PARTICLES = 1500;
 const PARTICLE_DENSITY = 0.0005;
 const PARTICLE_SIZE = 1;
 const DELTA = 0.005;
