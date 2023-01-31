@@ -76,12 +76,14 @@ body {
     min-height: 8vh;
     background-color: rgb(49, 49, 45);
 
-    filter: drop-shadow(0px 0px 15px rgb(245, 126, 19, 0.2));
+    filter: drop-shadow(0 0 1vh rgb(245, 126, 19, 0.2));
 }
 
 .navigation-links {
     display: flex;
     width: 100%;
+    min-height: 100px;
+    padding: 2.0vh 0.5vw;
 
     align-items: center;
     justify-content: space-evenly;
@@ -92,13 +94,13 @@ body {
 }
 
 .navigation-links a {
-    padding: 15px 25px;
+    padding: 1.0vh 1.5vw;
 
-    font-size: 24px;
+    font-size: 1.8vmax;
     color: white;
     text-decoration: none;
     font-family: 'Bebas Neue';
-    letter-spacing: 10px;
+    letter-spacing: 0.2vw;
 
     transition: all 0.3s ease;
 }
@@ -106,18 +108,18 @@ body {
 /* Dumb hack because letter-spacing adds an extra space after words */
 .navigation-links a:after {
     content: " ";
-    margin-left: -10px;
+    margin-left: -0.5vw;
 }
 
 .navigation-links li a:hover {
     display: inline-block;
-    border-bottom: 4px solid white;
+    border-bottom: 0.5vh solid white;
 }
 
 .selected {
     display: inline-block;
-    padding: 15px 25px;
-    border-bottom: 4px solid rgb(245, 126, 19);
+    padding: 1.0vh 1.5vw;
+    border-bottom: 0.5vh solid rgb(245, 126, 19);
 }
 
 .page-block {
@@ -134,20 +136,23 @@ body {
 .main-text-container {
     z-index: 1;
 
-    padding: 500px 0;
+    display: flex;
+    flex-direction: column;
+    
+    height: 50vh;
+
     justify-content: center;
-    align-items: center;
+    align-items: left;
 }
 
 .about-container {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(49, 49, 45, 0.8);
     backdrop-filter: blur(15px);
     z-index: 1;
 
-    padding: 10px 20px;
-    width: 100%;
-    height: 100%;
-    height: 70vh;
+    padding: 4vh 2vh;
 }
 
 .about-container h1 {
@@ -165,26 +170,16 @@ body {
 }
 
 .call-to-action-container {
-    background-color: rgba(221, 144, 79, 0.08);
-    backdrop-filter: blur(25px);
-    z-index: 1;
-
-    padding: 10px 20px;
-    width: 100%;
-    height: 100%;
-    height: 1000px;
-
-    flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-}
+    z-index: 1;
 
-.call-to-action-container p {
-    font-size: 2vh;
-    font-family: 'Sunflower';
-    color: whitesmoke;
+    background-color: rgba(221, 144, 79, 0.08);
+    backdrop-filter: blur(25px);
 
-    margin: 1vh 1vw;
+    padding: 4vh 2vh;
 }
 
 .call-to-action-container h1 {
@@ -201,10 +196,8 @@ body {
     justify-content: space-around;
     align-items: center;
 
-    padding: 10px 20px;
+    padding: 1.5vh;
     width: 100%;
-    height: 100%;
-    min-height: 8vh;
     backdrop-filter: blur(5px);
 }
 
@@ -214,42 +207,39 @@ body {
     justify-content: center;
     align-items: center;
 
-    margin-top: 3vh;
-    margin-bottom: 3vh;
-    padding: 0vh 2vh;
-
-    min-width: 2vw;
-    min-height: 2vw;
-    max-width: 4vw;
-    max-height: 4vw;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 
     text-decoration: none;
 
     transition: all 0.5s ease;
 }
 
-.social-link div {
+.social-link a {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+
+    padding: 1vmin;
 }
 
 .social-link img {
-    padding: 0.5vw;
-    border-radius: 0.7vw;
+    padding: 0.5vmax;
+    border-radius: 0.5vmax;
     background-color: rgb(245, 126, 19);
 
-    min-width: 2.5vw;
-    min-height: 2.5vw;
-    max-width: 3vw;
-    max-height: 3vw;
+    width: 4vmax;
+    height: 4vmax;
+
+    /* max-width: 4vh; */
+    /* max-height: 4vh; */
 }
 
 .social-link p {
-    padding: 0vh 3vh;
-    
     color: white;
     font-family: "Glorine";
+    text-decoration: none;
     font-size: 0;
     opacity: 0;
 
@@ -257,7 +247,8 @@ body {
 }
 
 .social-link:hover p {
-    font-size: 24px;
+    padding-left: 3vh;
+    font-size: 1.3vmax;
     opacity: 1;
 }
 
@@ -278,7 +269,6 @@ body {
     width: 100%;
     height: 100%;
 
-    /* filter: drop-shadow(0px 0px 15px rgba(5, 5, 5, 1)); */
     backdrop-filter: blur(25px);
 }
 .work-row {
@@ -286,7 +276,7 @@ body {
     display: flex;
     flex-direction: row;
 
-    justify-content: center;
+    justify-content: space-around;
     align-items: stretch;
     justify-self: center;
     align-self: center;
@@ -302,14 +292,13 @@ body {
 
     text-decoration: none;
 
-    padding: 10px 10px;
-    margin: 10px 10px;
+    padding: 1vmax;
+    margin: 1vmax;
     align-items: center;
     
     width: 25%;
-    height: 100%;
 
-    border-radius: 2px;
+    border-radius: 0.5vh;
 
     transition: all 0.6s ease;
 }
@@ -321,24 +310,22 @@ body {
 .content-title {
     color: white;
 
-    margin: 15px 10px;
-
-    font-size: 26px;
+    margin: 1vmax;
+    font-size: 1.1vmax;
     /* text-transform: uppercase; */
     font-family: 'Sunflower';
 }
 
 .content-thumbnail {
-    border-radius: 1px;
+    border-radius: 0.3vh;
 
     width: 100%;
-    height: 1%;
     aspect-ratio: 4 / 3;
     object-fit: cover;
 
     transition: all 0.4s ease;
 
-    filter: saturate(0.2);
+    filter: saturate(0.3);
 }
 
 .content-box:hover .content-thumbnail {
@@ -350,38 +337,38 @@ body {
     width: 100%;
     height: 100%;
 
-    padding-top: 10px;
+    padding-top: 2vh;
 
     justify-content: flex-start;
     align-items: center;
 }
 
 .content-tag {
-    padding: 10px 15px;
-    margin-right: 10px;
+    padding: 0.7vmax;
+    margin-right: 0.6vw;
     
-    border-radius: 10px;
+    border-radius: 0.3vh;
+    font-size: 1.5vmin;
 
     color: white;
     font-family: "Glorine";
-    text-decoration: none;
 }
 
 .big-text {
     color: white;
 
-    font-size: 96px;
+    font-size: 6vmin;
     text-transform: uppercase;
     font-family: 'Lemon Milk';
 
-    filter: drop-shadow(0px 0px 10px rgba(196, 48, 22, 0.1))
+    filter: drop-shadow(0px 0px 1vh rgba(196, 48, 22, 0.1))
 }
 
 .small-text {
     color: white;
     opacity: 0.5;
     
-    font-size: 36px;
+    font-size: 2.5vmin;
     font-style: italic;
     text-transform: lowercase;
     font-family: 'Sunflower';
@@ -393,10 +380,10 @@ body {
 
 .button a {
     background-color: rgb(245, 126, 19);
-    font-size: 24px;
+    font-size: 2vmin;
 
     border-radius: 0.2vh;
-    padding: 0.3vh;
+    padding: 0.3vmax 0.8vmax;
 
     text-decoration: none;
     font-family: 'Bebas Neue';
@@ -410,4 +397,6 @@ body {
 
 .button p {
     color: black;
+    font-size: 2vmax;
+    font-family: "Sunflower";
 }
