@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../../styles.css" />
+        <link rel="stylesheet" href="../blogstyles.css" />
+        <link rel="stylesheet" href="../atom-one-dark-reasonable.min.css" />
+        <title>Arbitrary Black Hole Rendering</title>
+        <script>
+            MathJax = {
+              tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+              displayAlign: "center"
+            };
+        </script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    </head>
+    <body class="article-body">
+        <div class="article-header">
+            <a class="row" href="../home.html">
+                <h1>Andrew Combs</h1>
+                <h1 class="light">Project Blog</h1>
+            </a>
+        </div>
+        <div class="row center">
+            <div class="article-column">
+                <h1>
+                    Arbitrary Black Hole Rendering
+                </h1>
+                <p>
+                    An interesting dive into creating problems for the sake of solving them
+                </p>
+                <p class="italic">
+                    1 Mar 2024
+                </p>
+
+                <div
+                    class="article-main-photo"
+                    style="background-image: url(../../media/arbitrary-black-holes/Donut2.png)"
+                >
+                    <p class="photo-footer">
+                        A donut shaped black hole
+                    </p>
+                </div>
+
+                <div class="tldr-section">
+                    <p>
+                        <b>TLDR:</b>
+                        Approximating spacetime distortion to render the heaviest donut ever theorized. Interactive demos at the bottom.
+                    </p>
+                </div>
+
+                <div class="article-section column">
+                    <h2>Getting Inspired</h2>
+<p>Last year I watched the incredible sci-fi thriller <em>Interstellar</em> for the first time. While the movie is a narrative and visual masterpiece from start to finish, there was one scene that I just couldn&#39;t get out of my head:</p>
+<p><img src="https://interactive.wired.com/www-wired-com__2014__10__astrophysics-interstellar-black-hole/ut_interstellarOpener_f.png" alt="Interstellar&#39;s famous black hole, &quot;Gargantua&quot;">
+<em>Interstellar&#39;s famous black hole &quot;Gargantua&quot;, via <a href="https://www.wired.com/2014/10/astrophysics-interstellar-black-hole/">Wired</a></em></p>
+<p>&quot;Gargantua&quot;, the supermassive black hole shown in the movie, captivated audiences and critics alike, and was in part the reason why the film won the 2015 Academy Award for Best Visual Effects, beating out movies from the <em>Planet of the Apes</em>, <em>X-Men</em>, <em>Guardians of the Galaxy</em>, and <em>Captain America</em> franchises.</p>
+<p>But Interstellar boast more than most academy award winners, as it also received <strong>academic</strong> acclaim in the form of two influential theoretical astrophysics papers.</p>
+<p>&quot;<strong>Visualizing Interstellar&#39;s Wormhole</strong>&quot; and  &quot;<strong>Gravitational Lensing by Spinning Black Holes in Astrophysics, and in the Movie Interstellar</strong>&quot; were created based on the results of Interstellar. Christopher Nolan, the director behind the movie, wanted to write a compelling story involving both impossibly long distance travel and time dilation, but still wanted to make it somehow scientifically plausible. After a long search, he found answers with famous theoretical astrophysicist Kip Thorne: <strong>wormholes</strong> for distance, and <strong>black holes</strong> for time. There are far better resources to understand spacetime dilation, but in short, extremely heavy objects warp the fabric of the universe, causing reality to bend inward and time to move slower the closer you get. Both black holes and wormholes (at least as far as our theoretical knowledge of wormholes suggests) are heavy enough to warp spacetime, giving Nolan a perfect mode of plausible space and time travel.</p>
+<p>Now most films would take this concept and create the VFX for it with shortcuts or workarounds, but <em>Interstellar</em> isn&#39;t &quot;most films&quot;. No, they were going for accuracy by any means necessary, which meant implementing a set of relativistic equations to simulate the light as it would actually behave. The visual effects house <em>Double Negative</em> created a rendering engine that implemented Thorne&#39;s equations and produced nearly 800 <strong>terabytes</strong> of data of the most accurate depiction of a supermassive black hole ever made. Thorne was reportedly amazed by the images produced, and discovered for possibly the first time that a black hole&#39;s <strong>accretion disk</strong> (the trapped matter and light orbiting around it) doesn&#39;t appear as a ring, but as a folded over disk. As it turns out, the black hole warps the space around it to the point that the accretion disk is visible above and below the hole too.</p>
+<p>Tangent aside, Interstellar was very inspiring, but I still didn&#39;t think about doing anything with it. The real inspiration was a bagel. More specifically, the bagel with everything on it, from <em>Everywhere, Everywhere, All At Once</em>.</p>
+<p><img src="https://cdn.80.lv/api/upload/content/c1/images/63f4a62b58c7e/widen_1840x0.jpeg" alt="Bagel with everything on it from _Everything, Everywhere, All At Once_">
+<em>Bagel with everything on it from &quot;Everything, Everywhere, All At Once&quot;</em></p>
+<p>A bagel with everything on it would be pretty heavy, so it would probably bend light just like a black hole: assuming it stays in a shape, <strong>what would a bagel shaped black hole look like?</strong></p>
+<p>So, here&#39;s the mission statement: <strong>build a 3D rendering engine that can render a black hole shaped like a bagel</strong>. Where on <em>earth</em> do you even begin?</p>
+<h2>Building the Renderer</h2>
+<p>The first thing we need to do is choose <em>how</em> we&#39;re going to render it. Multiple methods exist, each with their own pros and cons, and quirks of implementation which will make this project easier or harder. Lets take a look at the different methods available to us.</p>
+<h3>Rasterization</h3>
+<p>Video games, 3D maps, and essentially any interactive 3D environment you&#39;ve ever interacted with almost certainly use rasterization. It&#39;s by far the most common method for 3D rendering because it&#39;s extremely fast. Most modern GPUs have large blocks of their hardware specifically built for rasterization.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Dolphin_triangle_mesh.png/375px-Dolphin_triangle_mesh.png" alt="A simple model rendered with a rasterizer">
+<em>A simple model rendered with a rasterizer, via <a href="https://en.wikipedia.org/wiki/Triangle_mesh">Wikipedia</a></em></p>
+<p>Rasterization works by representing a scene as a set of <strong>meshes</strong>, where each mesh is made of a set of connected triangles. Project each of these triangles onto a camera plane, add some color and a bit of math for shading, and you&#39;ve got a functional rasterization engine!</p>
+<p><img src="https://www.scratchapixel.com/images/rasterization/raytracing-raster.png?" alt="Visualization of projecting a triangle onto the camera plane">
+<em>Visualization of projecting a triangle onto the camera plane, via <a href="https://www.scratchapixel.com/lessons/3d-basic-rendering/rasterization-practical-implementation/overview-rasterization-algorithm.html">ScratchAPixel</a></em></p>
+<p>This is an <em>extremely</em> high level overview of the process, and rasterization engines can be mind numbingly complex with vertex and fragment shaders, lighting models, various modes of culling and optimization, and so much more. Modern rasterization engines like those seen in <em>Unity</em> and <em>Unreal Engine</em> can render millions of triangles and create practically photorealistic images 60 times per second.</p>
+<p>Although it has potential for complexity, it also the best documented method on this list and by far the most accessible to learn and implement.</p>
+<p>Fast, versatile, and accessible, but how does it stack up for black hole rendering? Unfortunately, not very well. The main issue is that rasterization relies heavily on straight lines. The three points of the each triangle are projected in a straight line, and those three points are then connected in the image by straight lines. Even if you could project the points of a triangle to a camera in a warped path (which most certainly cannot be done efficiently), there&#39;s no way to know how the edges connecting those points would have warped, ultimately ruining the effect. Clearly, whatever method we use needs to handle rendering on a much smaller scale...</p>
+<h3>Casting/Tracing</h3>
+<p>Have you ever seen an animated movie or show? Congratulations, you&#39;ve probably seen ray tracing! The methods used had been thought of as far back as the 16th century, but the first proper use of ray tracing was at Bell Labs in 1979 for a short film called &quot;The Compleat Angler&quot;. Rendered as a tech-demo of sorts, the &quot;film&quot; is less than a minute long and showcases the first ever reflective and refractive animated computer graphics.</p>
+<p><img src="https://image.jimcdn.com/app/cms/image/transf/none/path/s4203c9b02a6fa8f1/image/ic1a658396a117d7e/version/1618574997/compleat-angler.jpg" alt="A high quality screen shot from &quot;The Compleat Angler&quot;">
+<em>A high quality screen shot from &quot;The Compleat Angler&quot;, via <a href="https://computeranimationhistory-cgi.jimdofree.com/compleat-angler-1979/">ComputerAnimationHistory</a></em></p>
+<p>Ray tracing&#39;s claim to fame is how accurately it can simulate reality and create photorealistic images. While the scene above looks elementary now, it was created in 1979, when the most powerful computer in the world (the <a href="https://en.wikipedia.org/wiki/Cray-1">Cray 1</a>) was about <strong>27,000 times slower than an iPhone 15 Pro</strong> (160 Megaflops v.s. 4.29 Teraflops). Unlike rasterization, ray tracing models simulate light individual light beams. The title of this section is <strong>Tracing/Casting</strong> because ray tracing is normally (incorrectly) used as a generalization for three types of rendering:</p>
+<p><strong>Ray Casting</strong>: By far the simplest method. It works by by sending out a single ray per pixel and reading the color value of exactly where it intersects with the scene. For certain geometries it&#39;s extremely efficient, and was actually the basis for <em>Doom</em> and <em>Wolfenstein</em> rendering algorithms. However, what it gains in speed, it lacks in accuracy, and raycasting is generally orders of magnitude less realistic than the other methods.</p>
+<p><img src="https://lodev.org/cgtutor/images/wolf3d.jpg" alt="Ray casting in &quot;Wolfenstein 3D&quot;">
+<em>Ray casting in &quot;Wolfenstein 3D&quot;, via <a href="https://lodev.org/cgtutor/raycasting.html">LodeV.org</a></em></p>
+<p><strong>Ray Tracing</strong>: Proper ray tracing is ray casting on steroids. Hundreds or thousands of rays are shot out per pixel, which then bounce randomly according to the properties of the materials. Once they reach their bounce limit, they trace a path from their final hit to all light sources and get the final brightness of the original pixel. Extremely accurate, but also extremely slow: it&#39;s not uncommon for cinematic grade ray-traced renders to take hours or days per image.</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Recursive_raytrace_of_a_sphere.png/440px-Recursive_raytrace_of_a_sphere.png" alt="A ray traced render">
+<em>A ray traced render, via <a href="https://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29">Wikipedia</a></em></p>
+<p><strong>Path Tracing</strong>: Path tracing is a much more modern version of ray tracing. It works on the same basis of shooting bouncing rays, but bounces rays according to mathematic equations describing how they&#39;re most likely to move as opposed to pure randomness. It&#39;s much more efficient and, for most cases, produces nearly identical results, which is why it&#39;s the most widely used of the three.</p>
+<p><img src="https://www.iamag.co/wp-content/uploads/2015/08/Disney-Path-Tracing-6.jpg" alt="A screenshot from Disney&#39;s introduction to path tracing">
+<em>A screenshot from Disney&#39;s introduction to path tracing, via <a href="https://www.iamag.co/disney-path-tracing-explained/">IAMAG Inspiration</a></em></p>
+<p>So with all these methods to choose from, surely one of them will work, right? Unfortunately not. While these methods are great, they still all rely on straight lines to model light. While we can use some of their rendering methods to make more realistic results, we can&#39;t use the simulation methods because, just like in rasterization, the geometry is rendered using straight line intersection equations. While significant modifications could be done, those modifications are well out of the range of possibility for most people (me included). </p>
+<p>If only there was some type of rendering that didn&#39;t rely on straight line intersections...</p>
+<h3>Ray Marching</h3>
+<p>Although it has gotten far more popular over the last few years, ray marching is still a rather hidden field, even within much of computer graphics. Ray marching was first explicitly defined in <a href="https://www.cs.drexel.edu/~deb39/Classes/Papers/rtqjs.pdf">a paper from 1989</a> about rendering 3D fractals. There&#39;s no exact geometry to fractals, e.g. you can&#39;t shoot a ray and calculate the exact point where it hits, so ray marching was created out of necessity. Instead of shooting a ray directly to the surface, we instead subdivide its path and step many times, checking for a close enough distance to consider an intersection.</p>
+<p><img src="https://d3i71xaburhd42.cloudfront.net/1be42e956f953380d2fb242ee5f3ac3e33290dc0/500px/4-Figure2-1.png" alt="The original ray marching algorithm">
+<em>The original ray marching algorithm, via <a href="https://www.semanticscholar.org/paper/Ray-tracing-deterministic-3-D-fractals-Hart-Sandin/1be42e956f953380d2fb242ee5f3ac3e33290dc0">Semantic Scholar</a></em></p>
+<p>These steps are fixed for instances like volume rendering, however the real power of the technique comes when combined with <strong>signed distance fields</strong> or <strong>SDF</strong>s. SDFs are mathematical functions that describe the signed distance from the nearest point on a surface, where the distance is positive if you&#39;re outside of it and negative if you&#39;re inside (hence <em>signed</em> distance). This gives the nearest distance from your current point to the nearest surface, which is (by some math I won&#39;t get into) the ideal distance estimator. This means that each step we make is the largest possible one, meaning that we reach the surface in the theoretical smallest amount of steps.</p>
+<p><img src="https://iquilezles.org/articles/terrainmarching/gfx_03_p.jpg" alt="A ray-marched terrain by Inigo Quilez, probably the most influential figure in the popularity and development of ray marching">
+<em>A ray-marched terrain by Inigo Quilez, probably the most influential figure in the popularity and development of ray marching, via <a href="https://iquilezles.org/articles/terrainmarching/">Inigo Quilez</a></em></p>
+<p>Great! What does this have to do with black hole rendering? Well, ray marching doesn&#39;t use an exact equation or projection to reach the surface and does it in multiple steps before hitting a surface. Because of the subdivisions, we are no longer bound to a straight line: what&#39;s stopping us from changing the direction of the ray midway through?</p>
+<h3>Past Research</h3>
+<p><em>Interstellar</em>&#39;s rendering engine is actually very well documented, especially with the two papers written on the subject. Their implementation models the curvature of spacetime with a set of equations and then uses a mixed form of ray-tracing and ray-marching to take slow, fixed integration steps, updating all the values of each ray using discrete Runge–Kutta–Fehlberg integration of a set of first order differential equations. If that sounds like a lot, it is! And it only gets more absurd once you see the calculations that are being done per step, per ray.</p>
+<p><img src="https://content.cld.iop.org/journals/0264-9381/32/6/065001/revision1/cqg508751eqna20.gif?Expires=1709913893&Signature=gsN4VBbIgODK0BM~AnycUNGpx2rQm6OFDMHUnR39L68YCtgZ3XkJgoXVL~ffry50yybZR5Qmf0wY0OLcSUzE02En1zXoBmiCq89k91FXATJiCn~6bh0JOL-z-vb20jo9q8iqTs4QVHaa1QrVMMdergAt58BZVXMNTz8kEZzLgcOxrI4cuREBFD2~s7pGyVjboWkYShfF0Qz7yeLjm4QnLL1oSK8MtaSkmXmDmIPQ1zeRGXKWKqaaP~UwQj22TMSDMHphXKUqGVgb162-22PDSHLg9gIWz4wbe4gKxCxsSH8MW7IsBQ5vV2KMp2RlViHsLRnuyb0U09T5-~cMjjs82Q__&Key-Pair-Id=KL1D8TIY3N7T8" alt="One of four momentum calculations that&#39;s done for each ray in the original engine">
+<em>One of four momentum calculations that&#39;s done for each ray in the original engine, via <a href="https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001">IOPScience</a></em></p>
+<p>This is just one of many operations performed, and calculations like this are the reason that each frame of the black hole and worm hole renderings took over 100 hours. If this <em>does</em> seem up your alley, I implore you to look at the <a href="https://pubs.aip.org/aapt/ajp/article/83/6/486/1057802/Visualizing-Interstellar-s-Wormhole">original paper on wormholes</a> and the <a href="https://iopscience.iop.org/article/10.1088/0264-9381/32/6/065001">original paper on black holes</a>. For those of us who are not theoretical astrophysicists though, this is completely out of the question. Even though copying the equations down would be possible, it would take hundreds of hours to render even a single frame on consumer hardware, and it wouldn&#39;t accomplish the original goal of a bagel shaped black hole!</p>
+<h3>Educated Shortcuts</h3>
+<p>So the proper way is out of the question, but there are some shortcuts we can make. There are two <em>massive</em> assumptions we can make that turn this project from impossible to trivial at the slight expense of ignoring about a hundred of years of physics research. Firstly, <strong>we will assume that all gravity is approximately governed by Newtonian mechanics</strong>. </p>
+<div class="math-container">
+
+<p>$ F_G=G*\dfrac{m_1m_2}{r^2} $</p>
+</div>
+
+<p>This is an egregious assumption to make for many reasons, but modeling forces is far easier than the abstract geometry of spacetime. Secondly, <strong>we will assume that photons behave like particles</strong>. This one is less appalling, at least in the field of computer graphics, as all modern rendering engines (save a few experimental ones and tech demos) work based on the assumption that light is a ray, and ignores most wavelike properties. That being said, we will have to assume they have mass in order to use the gravity equation above.</p>
+<p><img src="https://images.ctfassets.net/vrrt8fsfwf0e/71swjYDdfiSxuAuNrrNTya/98ae412ff05290a3995f0c8644c7f5c0/hnet.com-image.svg" alt="The difference between Newtonian and Relativistic gravity">
+<em>The difference between Newtonian and Relativistic gravity (from a site that no longer exists, somehow)</em></p>
+<p>While much of the accuracy is gone, these assumptions will make the project actually possible, and will still provide a result recognizable as a black hole.</p>
+<p>Additionally, we&#39;ll be using a varying length ray marching, also known as <strong>sphere marching</strong>. This will vastly speed up the renderer to essentially real time while causing a theoretical minimal loss of accuracy. </p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Visualization_of_SDF_ray_marching_algorithm.png/2880px-Visualization_of_SDF_ray_marching_algorithm.png" alt="Sphere tracing in action">
+<em>Sphere tracing in action, via <a href="https://en.wikipedia.org/wiki/Ray_marching#/media/File:Visualization_of_SDF_ray_marching_algorithm.png">Wikipedia</a></em></p>
+<p>As can be seen above, sphere tracing allocates more steps the closer you are to an object. Since our equation for gravity is proportional to $\dfrac{1}{r^2}$, the force from gravity is stronger at nearer distances. We automatically have more steps when we are closer, meaning that when more motion is present, more detail is allocated to accurately tracking that motion.</p>
+<h3>The Algorithm</h3>
+<p>Finally, we get to actually building the algorithm. Using elementary physics, we compile the equations as follows: </p>
+<div class="math-container">
+
+<p>$F=ma \text{, } \  F_G=G*\dfrac{m_1m_2}{r^2} \text{, and } \  r=vt$</p>
+<p>$m_1a = G*\dfrac{m_1m_2}{r^2} \Longrightarrow a=G\dfrac{m_2}{r^2}$</p>
+<p>$r=vt \Longrightarrow \ t=\dfrac{r}{v}$</p>
+</div>
+
+
+<p>From there, we can employ $v=at$ to calculate the changing velocity and do the whole process over again. This means that all we need to calculate the change per step is the radius, the velocity of the particle at that step, and the mass of the attracting bodies. We have the radius from our SDF estimator, we can abritrarily set the mass of the attracting body, and we can initialize the velocity of the particle to the speed of light: we have everything we need to implement the algorithm.</p>
+<p>When raymarching, we typically give the ray a direction and then step it a certain radius. We do the same thing here, but we use a velocity that we normalize to get the direction. Keeping a non-normalized velocity allows us to use the equation above and calculate the approximate time it took for the ray to get to its next step.</p>
+<p>The code for implementing this in 2D is as follows:</p>
+<pre><code class="hljs language-js"><span class="hljs-comment">// Repeated until step radius is below a certain threshold</span>
+
+<span class="hljs-keyword">let</span> vx = <span class="hljs-title function_">getVelocityX</span>(); <span class="hljs-comment">// X velocity of ray</span>
+<span class="hljs-keyword">let</span> vy = <span class="hljs-title function_">getVelocityX</span>(); <span class="hljs-comment">// Y velocity of ray</span>
+<span class="hljs-keyword">let</span> M = <span class="hljs-title function_">getBlackHoleMass</span>();
+<span class="hljs-keyword">let</span> r = <span class="hljs-title function_">getStepRadius</span>();
+<span class="hljs-keyword">let</span> G = <span class="hljs-number">1</span>; <span class="hljs-comment">// Or 6.67e-11 with everything else scaled up</span>
+
+<span class="hljs-comment">// Calculate magnitude of velocity</span>
+<span class="hljs-keyword">let</span> velocityMagnitude = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(vx**<span class="hljs-number">2</span> + vy**<span class="hljs-number">2</span>);
+
+<span class="hljs-comment">// Calculate how long the step would take</span>
+<span class="hljs-keyword">const</span> dt = r / velocityMagnitude;
+
+<span class="hljs-comment">// Calculate  acceleration</span>
+<span class="hljs-keyword">const</span> acceleration = (dt*G*M) / r**<span class="hljs-number">2</span>;
+
+<span class="hljs-comment">// Get force direction</span>
+<span class="hljs-keyword">const</span> ax = (target.<span class="hljs-property">x</span> - nx) / r;
+<span class="hljs-keyword">const</span> ay = (target.<span class="hljs-property">y</span> - ny) / r;
+
+<span class="hljs-comment">// Apply velocity (dt is multiplied in &quot;acceleration&quot;)</span>
+vx += ax * acceleration;
+vy += ay * acceleration;
+
+<span class="hljs-comment">// Calculate the new magnitude</span>
+velocityMagnitude = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sqrt</span>(vx**<span class="hljs-number">2</span> + vy**<span class="hljs-number">2</span>);
+  
+<span class="hljs-comment">// Take a step in the new normalized direction</span>
+nx += r*(vx / velocityMagnitude);
+ny += r*(vy / velocityMagnitude);
+</code></pre><p>Because this radius is the distance from the object and SDFs allow us to represent nearly any object mathematically, there&#39;s no limit to what shape of black hole we can make, meaning the everything bagel is just a few lines of code away!</p>
+<h2>Results</h2>
+<p>The algorithm demonstrated above was first implemented in 2D as a proof of concept which can be messed with below.</p>
+<div class="row">
+
+<script async src="//jsfiddle.net/iBrushC/4fdwnqjx/759/embed/result"></script>
+
+</div>
+
+<p>They ray will point toward your mouse, and you can use WASD like arrow keys to move around. The ray represents a beam of light and the random black scattered shapes represent black holes. The squares dotted around were to test the way light bends around non-circular bodies and to ensure that the algorithm holds for those too. The source code for this demo is available <a href="https://jsfiddle.net/iBrushC/4fdwnqjx/764/">here</a>.</p>
+<p>Now for the main event. How did it turn out in 3D? In short, extremely well. Despite all of the shortcuts, effects like gravitational lensing and the curved accretion disc are still clearly visible, and most importantly, it looks cool.</p>
+<div class="row">
+
+<p><img src="../../media/arbitrary-black-holes/Donut1.png" alt="Black hole donut rendering #1"></p>
+<p><img src="../../media/arbitrary-black-holes/Donut2.png" alt="Black hole donut rendering #2"></p>
+</div>
+
+<div class="row">
+
+<p><img src="../../media/arbitrary-black-holes/BlackHole1.png" alt="Black hole rendering #1"></p>
+<p><img src="../../media/arbitrary-black-holes/BlackHole2.png" alt="Black hole rendering #2"></p>
+<p><img src="../../media/arbitrary-black-holes/BlackHole3.png" alt="Black hole rendering #3"></p>
+</div>
+
+<p>And the best part? It runs in real time (for a reasonably modern computer) and on the web. Below is the fully functional, fully explorable final result of the project.</p>
+<div class="row" style="align-items: center; justify-content: center">
+
+<iframe width="640" height="360" frameborder="0" src="https://www.shadertoy.com/embed/dtXSzB?gui=true&t=10&paused=false&muted=true"></iframe>
+
+</div>
+
+<p>Like in the 2D demo, you can fly around with WASD, but here you can also go up with Q and down with E. </p>
+<p>The final project was written in GLSL through Shaderoy, a website for messing around with shaders online. You can also click and drag to look around. Unlike the 2D demo, this one uses physically accurate values for velocities, solar masses, and radii, so it should be as close to accurate as can be achieved with Newtonian mechanics. The full source code is available <a href="https://www.shadertoy.com/view/dtXSzB">here</a>, but bear in mind it may not be the most readable.</p>
+<h2>Conclusion</h2>
+<p>Looking back to about 90 paragraphs ago...</p>
+<blockquote>
+<p>So, here&#39;s the mission statement: <strong>build a 3D rendering engine that can render a black hole shaped like a bagel.</strong></p>
+</blockquote>
+<p>Mission complete. Though some <em>light</em> research on rendering engines (pun intended), we successfully devised and implemented an algorithm that, for all <em>I</em> know is the first to be able to semi-accurately model non-spherical black holes.</p>
+<p>So what next? Absolutely nothing! Projects are often done with the express intent of making some large discovery, creating a useful project, or solving a problem, but this one was the opposite: <strong>a problem was created for the express purpose of solving it</strong>. There&#39;s generally a pretty small overlap for each person of <em>important projects with direct effects</em> and <em>projects that you&#39;ll have fun doing</em>, so if you only focus on doing important projects you might burn yourself out doing stuff you don&#39;t even enjoy. Plus, regardless of what, you learn something from everything you do. While I couldn&#39;t find a single practical use for a spacetime-distorting bagel renderer, I found plenty of use for the same ray marching and general rendering methods while working on medical volume rendering. A silly idea about a bagel turned out to be one of my all-time favorite projects and the ideas I learned from it turned out to be extremely beneficial down the line.</p>
+<p>So what can be learned from this whole experience? <strong>It&#39;s fun to do stuff for the sake of doing it</strong>. It doesn&#39;t matter what, why, or how, but at least trying to do something is better than nothing at all. But <strong>don&#39;t forget to leave time to let yourself get inspired</strong>, since without taking a couple hours to watch some movies, I would have never come up with this idea in the first place. Just like the project it&#39;s talking about, there&#39;s no real higher purpose to this article, it&#39;s just a thing I&#39;m doing because I want to be doing it, and honestly, I&#39;m having a great time.</p>
+<p>This ended up being about 2000 words longer than I expected, so thanks for getting this far if you did. Next blog will be out in hopefully less than 30 days and be about either fractal rendering, reinforcement learning, or DIY hacker technology.</p>
+<p>👋</p>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
