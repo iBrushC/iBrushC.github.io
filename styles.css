@@ -61,8 +61,6 @@ h1 {
 
     font-family: Garamond, "Times New Roman", Times, serif;
     font-weight: 600;
-    letter-spacing: 0.2rem;
-
     font-size: min(5.5rem, 6vw);
     padding: 0;
     margin: 0;
@@ -73,7 +71,7 @@ h1 {
 
 h2 {
     font-family: Garamond, "Times New Roman", Times, serif;
-    font-size: min(3rem, 3vw);
+    font-size: min(2.5rem, 3vw);
     padding: 0;
     margin: 0 0 1.2vh 0;
 
@@ -115,7 +113,7 @@ a {
 
 p {
     font-family: Garamond, "Times New Roman", Times, serif;
-    font-size: min(2rem, 1.5vw);
+    font-size: min(1.7rem, 1.5vw);
     font-weight: 100;
     padding: 0;
     margin: 0;
@@ -165,7 +163,7 @@ button:active {
     width: 100%;
     /* height: 100%; */
     display: grid;
-    grid-template-rows: minmax(10vh, 8rem) minmax(90vh, 60rem);
+    grid-template-rows: minmax(13vh, 8rem) minmax(87vh, 60rem);
     grid-template-columns: 1fr 0.02fr 1fr 0.02fr 1fr;
     grid-template-areas:
         "header header    header divider-2 zone-3"
@@ -202,6 +200,7 @@ button:active {
     /* padding: min(1.5vw, 2rem) min(4vw, 3rem); */
     padding-top: min(0.75vw, 1rem);
     padding-left: min(3vw, 2.5rem);
+    /* background-color: red; */
 }
 .title-area {
     display: flex;
@@ -369,8 +368,8 @@ button:active {
 
 .profile-photo {
     float: left;
-    width: min(225px, 15vw);
-    height: min(225px, 15vw);
+    width: min(150px, 10vw);
+    height: min(150px, 10vw);
 
     background-image: url("media/profile-photo.jpg");
     background-size: 110%;
@@ -429,7 +428,7 @@ button:active {
     transition: transform 0.1s ease-in-out;
 }
 .contact-row h4 {
-    font-size: min(2.2rem, 2.1vw);
+    font-size: min(1.8rem, 2.1vw);
 }
 
 .contact-row:hover {
