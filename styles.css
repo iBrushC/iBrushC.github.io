@@ -162,7 +162,7 @@ button:active {
 .page-body {
     width: 100%;
     display: grid;
-    /* grid-template-rows: minmax(10vh, 8rem) minmax(90vh, 60rem); */
+    grid-template-rows: minmax(13vh, 8rem) minmax(87vh, 60rem);
     grid-template-columns: 1fr 0.02fr 1fr 0.02fr 1fr;
     grid-template-areas:
         "header header    header divider-2 zone-3"
