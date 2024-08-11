@@ -86,13 +86,15 @@ First of all, we can safely rule out modifying an existing camera to use an e-pa
 
 With that ruled out, the only option is to build it from the ground up. This seems scary but turns out to be it's extremely easy. There are countless camera modules and equally as many microcontrollers and single-board computers (SCBs) to pair with them. In my search, I found the [Mini ESP-CAM](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html), a hilariously small controller and camera:
 
-![enter image description here](https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/2/-/2-113991115-xiao-esp32s3-sense-45font_2.jpg)
+![Mini ESP-CAM](https://media-cdn.seeedstudio.com/media/catalog/product/cache/bb49d3ec4ee05b6f018e93f896b8a25d/2/-/2-113991115-xiao-esp32s3-sense-45font_2.jpg)
+_Mini ESP-CAM, via [Seeed Studios](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html)_
 
 As cute as the tiny camera modules were, I remembered already had a Raspberry Pi and its associated camera module from a fish monitoring system I had set up earlier in the year. That fish was well past needing to be monitored, so the resources were better used elsewhere.
 
 Almost every part was chosen out of convenience because "I might as well use it because I have it and it technically works." From the battery and charger to the switches and buttons, the majority of the parts were recycled from old projects or broken technology. In the end, the only thing I ended up buying was the [e-paper display](https://a.co/d/cPArgxv).
 
-![enter image description here](https://m.media-amazon.com/images/I/61l17WVbk3L._AC_SX679_.jpg)
+![The e-paper display I went with](https://m.media-amazon.com/images/I/61l17WVbk3L._AC_SX679_.jpg)
+_The e-paper display I went with, via [Amazon](https://a.co/d/cPArgxv)_
 
 After thorough searching, this was the only display that I could find that would be large enough to be visible, small enough to be portable, had software support, and had an aspect ratio that wouldn't distort the images too much. Additionally, the buttons provide a useful interface for the bare minimum functionality that the device.
 
@@ -106,7 +108,8 @@ I sank a solid several hours into getting my display recognized, along with fixi
 
 I wasn't too surprised by the random Amazon display having questionable support and documentation, but I was _shocked_ at how inconsistent the resources for the Raspberry Pi were. If you look up "Raspberry Pi Camera Take Picture", nearly half the results on the first page still suggest using `raspistill`, a command which has been outdated for years at this point. Maybe I'm just spoiled with non-SCB development, but I had to _hunt_ for up-to-date resources for almost everything.
 
-The good news is that once I figured out how to take pictures and use the display, everything else was a breeze. For how janky it was to set up, the display package was packed with a surprising amount of examples and convenience features. It even does automatic image scaling and conversion, including **Floyd Steinburg dithering**, an algorithm I was hoping to learn and implement myself...
+The good news is that once I figured out how to take pictures and use the display, everything else was a breeze. For how janky it was to set up, the display package was packed with a surprising amount of examples and convenience features. It even does automatic image scaling and conversion including **Floyd Steinburg dithering**, a fairly sophisticated algorithm for representing images with a limited color palette.
+
 ![A Floyd-Steinburg dithered image](https://upload.wikimedia.org/wikipedia/commons/c/c1/Michelangelo%27s_David_-_Floyd-Steinberg.png)
 _A Floyd-Steinburg dithered image, via [Wikipedia](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering)_
 
@@ -128,7 +131,8 @@ _A scary-looking design made in OnShape, via [dezignstuff](https://dezignstuff.c
 
 Now I am, for all intents and purposes, a beginner at best, but I can't help but feel that years of building 3D art models carried over astoundingly well. Though the workflows share few similarities, the ideas of modeling remain the same: extrude here, bevel there, add cutouts, revolve, etc., etc.
 
-![An example of what I normally make with Blender](../../media/snaps-camera/rev1model.JPG)
+![The first revision of Snaps](../../media/snaps-camera/rev1model.JPG)
+_The first revision of Snaps_
 
 After a rather slow day of modeling and struggling through importing models, I sent off my completed model to be 3D printed. To literally everyone's surprise, everything fit first try! My improper knowledge of tolerances meant it didn't fit particularly well, but there's nothing a little bit of sanding and a box cutter can't fix. While my knowledge of CAD improved exponentially during this process, my understanding of mechanical construction is still greatly lacking. My _abstract_ design features an entirely hot glue and snap-fit joint construction which perfectly embodies the phrase "technically works".
 
