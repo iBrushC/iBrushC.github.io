@@ -1,0 +1,413 @@
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+a {
+    color: #000000;
+    font-weight: bold;
+}
+
+
+/* Setting up mobile and desktop elements */
+.mobile-div {
+    visibility: collapse;
+}
+@media only screen and (max-width: 750px) {
+    .desktop-div {
+        visibility: collapse;
+    }
+    .mobile-div {
+        visibility: visible;
+    }
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: inherit;
+    scrollbar-width: none;
+
+    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 80%, transparent 100%);
+    -webkit-mask-position: 0%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+}
+
+.clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.text-container {
+    margin: 2rem;
+    top: 0;
+    width: 30%;
+    position: absolute;
+    flex-direction: column;
+    text-align: center;
+
+    transition: all 1.0s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.home-page>.text-container {
+    margin: 0;
+    width: 100%;
+    top: 30%;
+}
+.text-container>p {
+    opacity: 0%;
+    font-size: 0;
+    font-family: 'Azeret Mono';
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.home-page>.text-container>p {
+    opacity: 100%;
+    font-size: 1.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    max-width: 75%;
+    align-self: center;
+    justify-self: center;
+
+    padding-bottom: 0.5rem;
+}
+
+.name-text {
+    font-family: 'Inria Serif';
+    font-size: 2rem;
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+    margin: 0;
+    /* padding: 0.2rem; */
+}
+
+.home-page>.text-container>.name-text {
+    font-size: 3.5rem;
+}
+
+/* Transitions */
+.section-title {
+    font-size: 1.8rem;
+    position: absolute;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    font-family: 'Azeret Mono';
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+/* About mobile adjustments */
+@media only screen and (max-width: 750px) {
+    .text-container{
+        margin: 1rem;
+    }
+    .home-page>.text-container>.name-text {
+        font-size: 2.5rem;
+        /* align-items:flex-start; */
+    }
+    .section-title {
+        font-size: 1rem;
+    }
+    .home-page>.text-container>p {
+        font-size: 1.0rem;
+    }
+}
+
+/* About */
+.about-title {
+    left: 25%;
+    top: 55%;
+}
+.about-page>.about-title {
+    font-size: 2rem;
+    left: 25%;
+    top: 18%;
+}
+.experience-page>.about-title, .projects-page>.about-title {
+    top: 2.5%;
+    left: 50%;
+}
+.about-section {
+    position: absolute;
+    top: 25%;
+    left: 51%;
+    width: 60%;
+    
+    opacity: 0%;
+    height: 0%;
+    user-select: none;
+    
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.about-section p {
+    font-size: 1.2rem;
+    font-family: 'Azeret Mono';
+}
+.about-page>.about-section {
+    user-select: auto;
+
+    height: 80%;
+    opacity: 100%;
+    transform: translate(-50%, 0);
+}
+
+/* About mobile adjustments */
+@media only screen and (max-width: 750px) {
+    .about-title {
+        left: 50%;
+        top: 58%;
+    }
+    .about-page>.about-title {
+        font-size: 2rem;
+        left: 50%;
+        top: 18%;
+    }
+    .experience-page>.about-title, .projects-page>.about-title {
+        
+        top: 2.5%;
+        left: 65%;
+    }
+}
+
+/* Experience */
+.experience-title {
+    left: 50%;
+    top: 55%;
+}
+.experience-page>.experience-title {
+    font-size: 2rem;
+    left: 25%;
+    top: 18%;
+}
+
+.about-page>.experience-title {
+    top: 2.5%;
+    left: 50%;
+}
+
+.projects-page>.experience-title {
+    top: 2.5%;
+    left: 75%;
+}
+
+.experience-section {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    top: 27%;
+    left: 51%;
+    width: 60%;
+    height: 0%;
+    
+    opacity: 0%;
+    user-select: none;
+    
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.experience-section>div {
+    flex: 1;
+}
+.experience-section h2 {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    font-family: 'Azeret Mono';
+    font-weight: 1000;
+}
+.experience-section h3 {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-family: 'Azeret Mono';
+    font-weight: 600;
+}
+.experience-section p {
+    font-size: 0.9rem;
+    margin: 0.55rem;
+    font-family: 'Azeret Mono';
+    font-weight: lighter;
+}
+.experience-page .experience-section {
+    user-select: auto;
+
+    height: 80%;
+    opacity: 100%;
+    transform: translate(-50%, 0);
+}
+
+/* Experience mobile adjustments */
+@media only screen and (max-width: 750px) {
+    .experience-title {
+        left: 50%;
+        top: 63%;
+    }
+    .experience-page>.experience-title {
+        font-size: 2rem;
+        left: 50%;
+        top: 18%;
+    }
+    .about-page>.experience-title, .projects-page>.experience-title {
+        top: 6.5%;
+        left: 65%;
+    }
+}
+
+/* Projects */
+.projects-title {
+    left: 75%;
+    top: 55%;
+}
+.projects-page>.projects-title {
+    font-size: 2rem;
+    left: 25%;
+    top: 18%;
+}
+.experience-page>.projects-title, .about-page>.projects-title {
+    top: 2.5%;
+    left: 75%;
+}
+
+.projects-section {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+
+    top: 25%;
+    left: 51%;
+    font-size: 0;
+    height: 0%;
+    
+    opacity: 0%;
+    user-select: none;
+    
+    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.projects-section h2 {
+    margin-bottom: 0;
+    font-size: 1.3rem;
+    font-family: 'Azeret Mono';
+    font-weight: 1000;
+}
+.projects-section h3 {
+    margin-bottom: 0;
+    font-size: 1.1rem;
+    font-family: 'Azeret Mono';
+    font-weight: 600;
+}
+.projects-section p {
+    font-size: 0.9rem;
+    width: 0;
+    font-family: 'Azeret Mono';
+    font-weight: lighter;
+}
+.projects-page .projects-section p {
+    width: auto;
+}
+.projects-page .projects-section {
+    user-select: auto;
+
+    width: 60%;
+    height: 80%;
+    opacity: 100%;
+    transform: translate(-50%, 0);
+}
+
+/* Projects mobile adjustments */
+@media only screen and (max-width: 750px) {
+    .projects-title {
+        left: 50%;
+        top: 68%;
+    }
+    .projects-page>.projects-title {
+        font-size: 2rem;
+        left: 50%;
+        top: 18%;
+    }
+    .about-page>.projects-title {
+    top: 2.5%;
+    left: 65%;
+    }
+    .experience-page>.projects-title {
+        top: 6.5%;
+        left: 65%;
+    }
+
+    .projects-page .projects-section {
+        height: 70%;
+    }
+}
+
+
+/* SPECIFIC IPHONE SE ADJUSTMENTS */
+@media only screen and (max-width: 380px) {
+    .name-text {
+        font-size: 1.6rem;
+    }
+    .home-page>.text-container>.name-text {
+        font-size: 2.5rem;
+    }
+    .about-title {
+        left: 50%;
+        top: 65%;
+    }
+    .experience-title {
+        left: 50%;
+        top: 69%;
+    }
+    .projects-title {
+        left: 50%;
+        top: 73%;
+    }
+}
+
+
+/* Extremely ugly for gradient transitions oops */
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    opacity: 100%;
+    overflow: hidden;
+    transition: all 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.home-bg {
+    background: linear-gradient(45deg, #ffffff 10%, #fffde6 100%);
+}
+
+.about-bg {
+    background: linear-gradient(230deg, #FFFFF0 10%, #FFF2F2 100%);
+}
+
+.experience-bg {
+    background: linear-gradient(45deg, #ffffff 10%, #e3ffd8 100%);
+}
+
+.projects-bg {
+    background: linear-gradient(230deg, #FFFFF3 10%, #dfeef5 100%);
+}
+
+.home-page>.about-bg, .home-page>.experience-bg, .home-page>.projects-bg {
+    opacity: 0%;
+}
+
+.about-page>.experience-bg, .about-page>.projects-bg, .about-page>.home-bg {
+    opacity: 0%;
+}
+
+.experience-page>.about-bg, .experience-page>.projects-bg, .experience-page>.home-bg {
+    opacity: 0%;
+}
+
+.projects-page>.about-bg, .projects-page>.experience-bg, .projects-page>.home-bg {
+    opacity: 0%;
+}

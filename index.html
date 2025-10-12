@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Azeret+Mono|Inria+Serif">
+    <link rel="stylesheet" href="styles.css">
+    <title>Andrew Combs Website</title>
+</head>
+<!-- Pre script to load the page based on the search query -->
+<script>
+    const switchPage = (newPage) => {
+        document.body.classList = `${newPage}-page`;
+        if ('URLSearchParams' in window) {
+            const url = new URL(window.location)
+            url.searchParams.set("page", newPage)
+            history.pushState(null, '', url);
+        }
+    }
+
+    window.onload = () => {
+        const searchParams = new URLSearchParams(window.location.search);
+        const queryPage = searchParams.get("page");
+        switch (queryPage) {
+            case ("home"): {
+                switchPage(queryPage);
+            } break;
+            case ("about"): {
+                switchPage(queryPage);
+            } break;
+            case ("experience"): {
+                switchPage(queryPage);
+            } break;
+            case ("projects"): {
+                switchPage(queryPage);
+            } break;
+            default: {
+                switchPage("home");
+            } break;
+        }
+    }
+</script>
+<body class="home-page">
+    <!-- Name -->
+    <div class="text-container">
+        <h1 class="name-text">
+            <div class="clickable" onclick="switchPage('home')">Andrew Combs</div>
+        </h1>
+        <p>Bioinspired designer, experienced programmer, driven maker, and aspiring wizard. BME@Cornell</p>
+        <p><a href="https://www.linkedin.com/in/andrew-m-combs/">Linkedin</a> | <a href="https://github.com/ibrushc">Github</a></p>
+    </div>
+
+    <!-- About -->
+    <h2 class="section-title about-title">
+        <div class="clickable" onclick="switchPage('about')">About</div>
+    </h2>
+    <div class="about-section">
+        <div class="scroll">
+            <p>I'm currently a sophomore at Cornell University studying Biomedical Engineering with a concentration in imaging and devices. I'm inspired by all the incredible ways biology and engineering build on each other, and want to use bioinspired design to design more effective, more cost efficient, greener solutions for healthcare and wearable technology.</p>
+            <p>My background is primarily in computer science and electrical engineering, which I still use in all of my projects. I'm particularly fascinated by simulations, low power/edge computing, graphics/rendering, and automation. I hope to apply these to the biomedical field primarily through better visualization and mobilization of advanced technologies.</p>
+            <p>Outside of academics, I'm a huge fan of rock climbing, gymnastics, photography, and all manner of arts and crafts.</p>
+            
+            <div style="margin-top: 3rem"></div>
+        </div>
+    </div>
+
+    <!-- Experience -->
+    <h2 class="section-title experience-title">
+        <div class="clickable" onclick="switchPage('experience')">Experience</div>
+    </h2>
+    <!-- MOBILE SINGLE COLUMN -->
+    <div class="mobile-div">
+        <div class="experience-section">
+            <div class="scroll">
+                <h2><u>Education</u></h2>
+                <div class="experience">
+                    <h3>Cornell University</h3>
+                    <p><i>2025 - </i></p>
+                    <p>Transfer student into Cornell University Meinig School of Biomedical Engineering.</p>
+                    <p>- 3.7 GPA</p>
+                </div>
+                <div class="experience">
+                    <h3>Nagoya University</h3>
+                    <p><i>2024-2025</i></p>
+                    <p>NUPACE International Exchange Student</p>
+                    <p>- JASSO Scholar</p>
+                    <p>- Harry C. Kelly Scholar</p>
+                </div>
+                <div class="experience">
+                    <h3>North Carolina State University</h3>
+                    <p><i>2023-2024</i></p>
+                    <p>Bachelors in Electrical and Computer Engineering</p>
+                    <p>- 4.0 GPA</p>
+                    <p>- Honors Scholar</p>
+                </div>
+                
+            <h2><u>Work</u></h2>
+                <div class="experience">
+                    <h3>Raleigh Biosciences</h3>
+                    <p><i>May - Aug 2024</i></p>
+                    <p>Led research and development on causal gene-expression for reverse engineering plant regulatory networks. Processed and analyzed large-scale datasets with high-performance computing, integrated cutting-edge machine learning architectures for biological data.</p>
+                </div>
+                <div class="experience">
+                    <h3>Sozzani Research Lab</h3>
+                    <p><i>Jan 2023 - Dec 2024</i></p>
+                    <p>Conducted computation genomics research on Arabidopsis Thaliana using Python and R. Proposed and developed transformer-based inference pipeline for gene expression patterns. Edited grant proposals and manuscripts, contributing to publication-ready papers.</p>
+                </div>
+                <div class="experience">
+                    <h3>Kitware (Distributed Computing)</h3>
+                    <p><i>May - Aug 2023</i></p>
+                    <p>Implemented better feedback systems for ultra-high-performance scientific computing as part of the DOE’s Exascale Computing Project using C++ and CMake. Implemented better analytics pipelines in industry software, presented results at company-wide review.</p>
+                </div>
+                <div class="experience">
+                    <h3>Kitware (Scientific Computing)</h3>
+                    <p><i>May - Aug 2022</i></p>
+                    <p>Implemented realistic rendering and lighting model into VTK.js, an open-source visualization toolkit with 100K+ users. Collaborated with users and other engineers to improve accessible, realistic rendering of medical, chemical, and biological visualizations.</p>
+                </div>
+
+                <div style="margin-top: 3rem"></div>
+            </div>
+        </div>
+    </div>
+    <!-- DESKTOP SPLIT SCREEN -->
+    <div class="desktop-div">
+        <div class="experience-section">
+            <div class="scroll">
+                <h2><u>Education</u></h2>
+                <div class="experience">
+                    <h3>Cornell University</h3>
+                    <p><i>2025 - </i></p>
+                    <p>Transfer student into Cornell University Meinig School of Biomedical Engineering.</p>
+                    <p>- 3.7 GPA</p>
+                </div>
+                <div class="experience">
+                    <h3>Nagoya University</h3>
+                    <p><i>2024-2025</i></p>
+                    <p>NUPACE International Exchange Student</p>
+                    <p>- JASSO Scholar</p>
+                    <p>- Harry C. Kelly Scholar</p>
+                </div>
+                <div class="experience">
+                    <h3>North Carolina State University</h3>
+                    <p><i>2023-2024</i></p>
+                    <p>Bachelors in Electrical and Computer Engineering</p>
+                    <p>- 4.0 GPA</p>
+                    <p>- Honors Scholar</p>
+                </div>
+
+                <div style="margin-top: 3rem"></div>
+            </div>
+            <div class="scroll">
+                <h2><u>Work</u></h2>
+                <div class="experience">
+                    <h3>Raleigh Biosciences</h3>
+                    <p><i>May - Aug 2024</i></p>
+                    <p>Led research and development on causal gene-expression for reverse engineering plant regulatory networks. Processed and analyzed large-scale datasets with high-performance computing, integrated cutting-edge machine learning architectures for biological data.</p>
+                </div>
+                <div class="experience">
+                    <h3>Sozzani Research Lab</h3>
+                    <p><i>Jan 2023 - Dec 2024</i></p>
+                    <p>Conducted computation genomics research on Arabidopsis Thaliana using Python and R. Proposed and developed transformer-based inference pipeline for gene expression patterns. Edited grant proposals and manuscripts, contributing to publication-ready papers.</p>
+                </div>
+                <div class="experience">
+                    <h3>Kitware (Distributed Computing)</h3>
+                    <p><i>May - Aug 2023</i></p>
+                    <p>Implemented better feedback systems for ultra-high-performance scientific computing as part of the DOE’s Exascale Computing Project using C++ and CMake. Implemented better analytics pipelines in industry software, presented results at company-wide review.</p>
+                </div>
+                <div class="experience">
+                    <h3>Kitware (Scientific Computing)</h3>
+                    <p><i>May - Aug 2022</i></p>
+                    <p>Implemented realistic rendering and lighting model into VTK.js, an open-source visualization toolkit with 100K+ users. Collaborated with users and other engineers to improve accessible, realistic rendering of medical, chemical, and biological visualizations.</p>
+                </div>
+
+                <div style="margin-top: 6rem"></div>
+            </div>
+        </div>
+    </div> 
+
+    <!-- Projects -->
+    <h2 class="section-title projects-title">
+        <div class="clickable" onclick="switchPage('projects')">Projects</div>
+    </h2>
+    <div class="projects-section">
+        <p>I do a lot of personal, self-driven projects. Here are some of my most recent!</p>
+        <div class="scroll">
+            <div class="project">
+                <h3>Fluid-based Fighting Game</h3>
+                <p>I created a two to four player fighting game where you fight opponents by shooting real-time simulated fire at them. The design and gameplay were heavily inspired by Super Smash brothers, however every single attack is done by simulating a high-power jet of fire and pushing opponents with it. It's written in pure C with Raylib as the background, and runs the fluid in the background as a shader stack.</p>
+                <p><a href="https://github.com/iBrushC/navier-stoked">See more (Github)</a></p>
+                <br>
+            </div>
+            <div class="project">
+                <h3>Surface Micromachining</h3>
+                <p>Over a several week sprint, I worked to design, build, and test a machine capable of sculpting micron-scale features into a block of wax. This was part of my goal to make my own samples of a type of dry adhesive called "gecko tape" which sticks to things with Van der Waals forces. I used an ESP32 and 1/256 substepping motor drivers to make a custom control board, then wrote a webserver-based interface to set up machining passes. I designed, 3D printed, and assembled the machine, then ran about 30 test runs. Though it could not repeatedly produce dry adhesives, it could create small ridges with ~50 microns of precision.</p>
+                <br>
+            </div>
+            <div class="project">
+                <h3>Assistive AI Wearable</h3>
+                <p>I built a wearable watch-ring combo Bluetooth controller that uses detects customizable gestures as input. It uses a small edge machine learning algorithm in combination with statistical tests, allowing it to detect any number of gestures that can be changed at any time. It is the first device of its kind, and can reliably detect a gesture with 10 samples. This type of device could assist those with limited ranges of motion that can't use traditional input modes like keyboards and mice.</p>
+            </div>
+            <div class="project">
+                <h3>DIY Digital Camera</h3>
+                <p>I designed, 3D printed, wired, and assembled a small camera in the same style as a digital point-and-shoot. It uses an electronic paper display that refreshes after each shot to simulate the process of film "developing," forcing users to slow down and creating excitement while watching the image develop after its taken.</p>
+            </div>
+            <div class="project">
+                <h3>Complex Fractal Plotting Website</h3>
+                <p>I created the only website that allows for plotting of arbitrary fractals based on their respective recursive equations. It can plot every popular complex fractal (Mandelbrot, Julia, Burning Ship, etc.) and more, with support for exponentials, trigonometric, and time variant functions.</p>
+                <p><a href="https://ibrushc.github.io/fractal-desmos/">Use it now!</a></p>
+            </div>
+            <div class="project">
+                <h3>Conspiracy Board Website</h3>
+                <p>Just a silly website to make those boards of images and strings that you always see in movies when someone's trying to solve a mystery.</p>
+                <p><a href="https://ibrushc.github.io/murderboarder/">Use it now!</a></p>
+            </div>
+            <div class="project">
+                <h3>Evolution-Driven Image Drawing</h3>
+                <p>I created a hybrid evolution/optimization driven algroithm to recreate images out of penstrokes. It used a custom error function to naturally allow for the evolution of artistry techniques like hatching and crosshatching. I then exported everything as GCODE and ran it on a modified 3D printer to test the algorithm in with real pen and paper.</p>
+                <p><a href="https://github.com/iBrushC/modern-evolutionary-art">See more (Github)</a></p>
+            </div>
+            <div class="project">
+                <h3>Arbitrary Black Hole Rendering</h3>
+                <p>I created a rendering engine that can simulate what black holes would look like if they weren't spheres. It uses signed distance fields to create a semi-relativistic path tracer which accurately recreates gravitational lensing and the halo-like wraparound of rings surrounding black holes.</p>
+                <!-- <p><a href="https://github.com/iBrushC/modern-evolutionary-art">Try it out (ShaderToy)</a></p> -->
+            </div>
+
+            <div style="margin-top: 3rem"></div>
+        </div>
+    </div>
+    
+    <div class="bg home-bg"></div>
+    <div class="bg about-bg"></div>
+    <div class="bg experience-bg"></div>
+    <div class="bg projects-bg"></div>
+</body>
+</html>
