@@ -85,7 +85,6 @@ a {
     font-size: 2rem;
     transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
     margin: 0;
-    /* padding: 0.2rem; */
 }
 
 .home-page>.text-container>.name-text {
@@ -100,6 +99,12 @@ a {
     transform: translate(-50%, -50%);
     font-family: 'Azeret Mono';
     transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@media only screen and (max-height: 700px) {
+    .home-page>.text-container {
+        top: 12%;
+    }
 }
 
 /* About mobile adjustments */
@@ -155,6 +160,13 @@ a {
     height: 80%;
     opacity: 100%;
     transform: translate(-50%, 0);
+}
+
+/* Wide adjustments */
+@media only screen and (max-height: 700px) {
+    .about-title {
+        top: 75%;
+    }
 }
 
 /* About mobile adjustments */
@@ -241,6 +253,13 @@ a {
     transform: translate(-50%, 0);
 }
 
+/* Wide adjustments */
+@media only screen and (max-height: 700px) {
+    .experience-title {
+        top: 75%;
+    }
+}
+
 /* Experience mobile adjustments */
 @media only screen and (max-width: 750px) {
     .experience-title {
@@ -316,6 +335,13 @@ a {
     height: 80%;
     opacity: 100%;
     transform: translate(-50%, 0);
+}
+
+/* Wide adjustments */
+@media only screen and (max-height: 700px) {
+    .projects-title {
+        top: 75%;
+    }
 }
 
 /* Projects mobile adjustments */
