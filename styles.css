@@ -16,7 +16,6 @@ a {
     font-weight: bold;
 }
 
-
 /* Setting up mobile and desktop elements */
 .mobile-div {
     visibility: collapse;
@@ -162,10 +161,17 @@ a {
     transform: translate(-50%, 0);
 }
 
-/* Wide adjustments */
-@media only screen and (max-height: 700px) {
+/* Wide adjustments 1 */
+@media only screen and (max-height: 450px) {
     .about-title {
         top: 75%;
+    }
+}
+
+/* Wide adjustments 2 */
+@media only screen and (max-height: 900px) {
+    .about-title {
+        top: 70%;
     }
 }
 
@@ -253,10 +259,17 @@ a {
     transform: translate(-50%, 0);
 }
 
-/* Wide adjustments */
-@media only screen and (max-height: 700px) {
+/* Wide adjustments 1 */
+@media only screen and (max-height: 450px) {
     .experience-title {
         top: 75%;
+    }
+}
+
+/* Wide adjustments 2 */
+@media only screen and (max-height: 900px) {
+    .experience-title {
+        top: 70%;
     }
 }
 
@@ -337,10 +350,30 @@ a {
     transform: translate(-50%, 0);
 }
 
-/* Wide adjustments */
-@media only screen and (max-height: 700px) {
+.project {
+    display: flex;
+    flex-direction: column;
+}
+
+.project img {
+    align-self: center;
+    border-radius: 2px;
+    width: 50%;
+    box-shadow: 4px 4px 1px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1.5rem;
+}
+
+/* Wide adjustments 1 */
+@media only screen and (max-height: 500px) {
     .projects-title {
         top: 75%;
+    }
+}
+
+/* Wide adjustments 2 */
+@media only screen and (max-height: 900px) {
+    .projects-title {
+        top: 70%;
     }
 }
 
