@@ -3,41 +3,17 @@ html {
     padding: 0;
 }
 
+/* Chrome, Safari, Opera, and modern Edge */
+body::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-a {
-    color: #000000;
-    font-weight: bold;
-}
-
-/* Setting up mobile and desktop elements */
-.mobile-div {
-    visibility: collapse;
-}
-@media only screen and (max-width: 750px) {
-    .desktop-div {
-        visibility: collapse;
-    }
-    .mobile-div {
-        visibility: visible;
-    }
-}
-
-.scroll {
-    overflow-y: scroll;
-    height: inherit;
-    scrollbar-width: none;
-
-    -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 1) 80%, transparent 100%);
-    -webkit-mask-position: 0%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-size: 100% 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #f5f5f5;
+    background: linear-gradient(180deg,rgba(255, 255, 255, 1) 0%, rgba(245, 245, 245, 1) 100%);
 }
 
 .clickable {
@@ -45,428 +21,132 @@ a {
     user-select: none;
 }
 
-.text-container {
+a {
+    margin: 0;
+}
+
+.slide-up-element {
+  animation: slideUpAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes slideUpAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+    display: flex;
     margin: 2rem;
-    top: 0;
-    width: 30%;
-    position: absolute;
-    flex-direction: column;
-    text-align: center;
-
-    transition: all 1.0s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.home-page>.text-container {
-    margin: 0;
-    width: 100%;
-    top: 30%;
-}
-.text-container>p {
-    opacity: 0%;
-    font-size: 0;
-    font-family: 'Azeret Mono';
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.home-page>.text-container>p {
-    opacity: 100%;
-    font-size: 1.5rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-    max-width: 75%;
-    align-self: center;
-    justify-self: center;
-
-    padding-bottom: 0.5rem;
-}
-
-.name-text {
-    font-family: 'Inria Serif';
-    font-size: 2rem;
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
-    margin: 0;
-}
-
-.home-page>.text-container>.name-text {
-    font-size: 3.5rem;
-}
-
-/* Transitions */
-.section-title {
-    font-size: 1.8rem;
-    position: absolute;
-    text-align: center;
-    transform: translate(-50%, -50%);
-    font-family: 'Azeret Mono';
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-@media only screen and (max-height: 700px) {
-    .home-page>.text-container {
-        top: 12%;
-    }
-}
-
-/* About mobile adjustments */
-@media only screen and (max-width: 750px) {
-    .text-container{
-        margin: 1rem;
-    }
-    .home-page>.text-container>.name-text {
-        font-size: 2.5rem;
-        /* align-items:flex-start; */
-    }
-    .section-title {
-        font-size: 1rem;
-    }
-    .home-page>.text-container>p {
-        font-size: 1.0rem;
-    }
-}
-
-/* About */
-.about-title {
-    left: 25%;
-    top: 55%;
-}
-.about-page>.about-title {
-    font-size: 2rem;
-    left: 25%;
-    top: 18%;
-}
-.experience-page>.about-title, .projects-page>.about-title {
-    top: 2.5%;
-    left: 50%;
-}
-.about-section {
-    position: absolute;
-    top: 25%;
-    left: 51%;
-    width: 60%;
-    
-    opacity: 0%;
-    height: 0%;
-    user-select: none;
-    
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.about-section p {
-    font-size: 1.2rem;
-    font-family: 'Azeret Mono';
-}
-.about-page>.about-section {
-    user-select: auto;
-
-    height: 80%;
-    opacity: 100%;
-    transform: translate(-50%, 0);
-}
-
-/* Wide adjustments 1 */
-@media only screen and (max-height: 450px) {
-    .about-title {
-        top: 75%;
-    }
-}
-
-/* Wide adjustments 2 */
-@media only screen and (max-height: 900px) {
-    .about-title {
-        top: 70%;
-    }
-}
-
-/* About mobile adjustments */
-@media only screen and (max-width: 750px) {
-    .about-title {
-        left: 50%;
-        top: 58%;
-    }
-    .about-page>.about-title {
-        font-size: 2rem;
-        left: 50%;
-        top: 18%;
-    }
-    .experience-page>.about-title, .projects-page>.about-title {
-        
-        top: 2.5%;
-        left: 65%;
-    }
-}
-
-/* Experience */
-.experience-title {
-    left: 50%;
-    top: 55%;
-}
-.experience-page>.experience-title {
-    font-size: 2rem;
-    left: 25%;
-    top: 18%;
-}
-
-.about-page>.experience-title {
-    top: 2.5%;
-    left: 50%;
-}
-
-.projects-page>.experience-title {
-    top: 2.5%;
-    left: 75%;
-}
-
-.experience-section {
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    top: 27%;
-    left: 51%;
-    width: 60%;
-    height: 0%;
-    
-    opacity: 0%;
-    user-select: none;
-    
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.experience-section>div {
     flex: 1;
-}
-.experience-section h2 {
-    margin-bottom: 0;
-    font-size: 1.3rem;
-    font-family: 'Azeret Mono';
-    font-weight: 1000;
-}
-.experience-section h3 {
-    margin-bottom: 0;
-    font-size: 1.1rem;
-    font-family: 'Azeret Mono';
-    font-weight: 600;
-}
-.experience-section p {
-    font-size: 0.9rem;
-    margin: 0.55rem;
-    font-family: 'Azeret Mono';
-    font-weight: lighter;
-}
-.experience-page .experience-section {
-    user-select: auto;
-
-    height: 80%;
-    opacity: 100%;
-    transform: translate(-50%, 0);
-}
-
-/* Wide adjustments 1 */
-@media only screen and (max-height: 450px) {
-    .experience-title {
-        top: 75%;
-    }
-}
-
-/* Wide adjustments 2 */
-@media only screen and (max-height: 900px) {
-    .experience-title {
-        top: 70%;
-    }
-}
-
-/* Experience mobile adjustments */
-@media only screen and (max-width: 750px) {
-    .experience-title {
-        left: 50%;
-        top: 63%;
-    }
-    .experience-page>.experience-title {
-        font-size: 2rem;
-        left: 50%;
-        top: 18%;
-    }
-    .about-page>.experience-title, .projects-page>.experience-title {
-        top: 6.5%;
-        left: 65%;
-    }
-}
-
-/* Projects */
-.projects-title {
-    left: 75%;
-    top: 55%;
-}
-.projects-page>.projects-title {
-    font-size: 2rem;
-    left: 25%;
-    top: 18%;
-}
-.experience-page>.projects-title, .about-page>.projects-title {
-    top: 2.5%;
-    left: 75%;
-}
-
-.projects-section {
-    position: absolute;
-    display: flex;
     flex-direction: column;
+    width: 100%;
+    text-align: left;
+    font-family: 'Azeret Mono';
+}
 
-    top: 25%;
-    left: 51%;
-    font-size: 0;
-    height: 0%;
-    
-    opacity: 0%;
-    user-select: none;
-    
-    transition: all 1.05s cubic-bezier(0.075, 0.82, 0.165, 1);
+img {
+    max-width: 100%;
 }
-.projects-section h2 {
-    margin-bottom: 0;
-    font-size: 1.3rem;
-    font-family: 'Azeret Mono';
-    font-weight: 1000;
-}
-.projects-section h3 {
-    margin-bottom: 0;
-    font-size: 1.1rem;
-    font-family: 'Azeret Mono';
-    font-weight: 600;
-}
-.projects-section p {
-    font-size: 0.9rem;
-    width: 0;
-    font-family: 'Azeret Mono';
-    font-weight: lighter;
-}
-.projects-page .projects-section p {
-    width: auto;
-}
-.projects-page .projects-section {
-    user-select: auto;
 
-    width: 60%;
-    height: 80%;
-    opacity: 100%;
-    transform: translate(-50%, 0);
+.header h1 {
+    margin: 0;
+}
+
+.header h3 {
+    font-weight: 100;
+    max-width: 90%;
+}
+
+#projects-grid {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-rows: auto;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .project {
-    display: flex;
-    flex-direction: column;
-}
-
-.project img {
-    align-self: center;
+    height: 300px;
+    background-color: white;
     border-radius: 2px;
-    width: 50%;
-    box-shadow: 4px 4px 1px 0px rgba(0, 0, 0, 0.2);
-    margin-bottom: 1.5rem;
+    border: 1px solid black;
+    position: relative;
+
+    cursor: pointer;
+    user-select: none;
+
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-/* Wide adjustments 1 */
-@media only screen and (max-height: 500px) {
-    .projects-title {
-        top: 75%;
-    }
+.project:hover {
+    transform: scale(1.02);
 }
 
-/* Wide adjustments 2 */
-@media only screen and (max-height: 900px) {
-    .projects-title {
-        top: 70%;
-    }
+.project-img {
+    display: flex;
+    height: 200px;
 }
 
-/* Projects mobile adjustments */
-@media only screen and (max-width: 750px) {
-    .projects-title {
-        left: 50%;
-        top: 68%;
-    }
-    .projects-page>.projects-title {
-        font-size: 2rem;
-        left: 50%;
-        top: 18%;
-    }
-    .about-page>.projects-title {
-    top: 2.5%;
-    left: 65%;
-    }
-    .experience-page>.projects-title {
-        top: 6.5%;
-        left: 65%;
-    }
+.project-bottom {
+    height: 100px;
+    width: calc(100% - 2rem);
+    overflow:hidden;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    background-color: white;
+    font-family: 'Azeret Mono';
 
-    .projects-page .projects-section {
-        height: 70%;
-    }
+
+    padding: 1rem;
 }
 
-
-/* SPECIFIC IPHONE SE ADJUSTMENTS */
-@media only screen and (max-width: 380px) {
-    .name-text {
-        font-size: 1.6rem;
-    }
-    .home-page>.text-container>.name-text {
-        font-size: 2.5rem;
-    }
-    .about-title {
-        left: 50%;
-        top: 65%;
-    }
-    .experience-title {
-        left: 50%;
-        top: 69%;
-    }
-    .projects-title {
-        left: 50%;
-        top: 73%;
-    }
+h4 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    padding: 0;
+}
+p {
+    margin: 0;
+    margin-top: 0.5rem;
+    padding: 0;
+    font-size: 13px;
 }
 
-
-/* Extremely ugly for gradient transitions oops */
-.bg {
+.tags {
     position: absolute;
     top: 0;
-    left: 0;
-    z-index: -1;
-    height: 100%;
-    width: 100%;
-    opacity: 100%;
-    overflow: hidden;
-    transition: all 0.9s cubic-bezier(0.075, 0.82, 0.165, 1);
+    right: 0.25rem;
+    padding: 0.25rem;
+
+    background-color: black;
+    color: white;
+    font-family: 'Azeret Mono';
+    opacity: 0.8;
+
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.home-bg {
-    background: linear-gradient(45deg, #ffffff 10%, #fffde6 100%);
+.date {
+    position: absolute;
+    top: 0;
+    left: 0.25rem;
+    font-family: 'Azeret Mono';
+
+    background-color: white;
+    color: black;
+    opacity: 0;
+
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.about-bg {
-    background: linear-gradient(230deg, #FFFFF0 10%, #FFF2F2 100%);
-}
-
-.experience-bg {
-    background: linear-gradient(45deg, #ffffff 10%, #e3ffd8 100%);
-}
-
-.projects-bg {
-    background: linear-gradient(230deg, #FFFFF3 10%, #dfeef5 100%);
-}
-
-.home-page>.about-bg, .home-page>.experience-bg, .home-page>.projects-bg {
-    opacity: 0%;
-}
-
-.about-page>.experience-bg, .about-page>.projects-bg, .about-page>.home-bg {
-    opacity: 0%;
-}
-
-.experience-page>.about-bg, .experience-page>.projects-bg, .experience-page>.home-bg {
-    opacity: 0%;
-}
-
-.projects-page>.about-bg, .projects-page>.experience-bg, .projects-page>.home-bg {
-    opacity: 0%;
+.project:hover .date, .project:hover .tags {
+    opacity: 1;
 }

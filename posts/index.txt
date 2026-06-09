@@ -1,0 +1,17 @@
+lorenz-attractor
+kitware-internship-vtkjs
+evolving-images
+frc-scouting-app
+blender-animation-plugins
+abstract-black-holes
+kitware-internship-hpc
+fractal-plotting
+microbiology-research
+raleigh-biosciences
+murderboard-website
+custom-camera
+ai-assistive-wearable
+surface-micromachining
+fluid-fighting-game
+macro-scanning
+organic-robotics-lab
