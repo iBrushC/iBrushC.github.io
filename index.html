@@ -8,50 +8,28 @@
     <title>Andrew Combs Website</title>
 </head>
 <!-- Pre script to load the page based on the search query -->
-<script>
-    const switchPage = (newPage) => {
-        document.body.classList = `${newPage}-page`;
-        if ('URLSearchParams' in window) {
-            const url = new URL(window.location)
-            url.searchParams.set("page", newPage)
-            history.pushState(null, '', url);
-        }
-    }
-
-    window.onload = () => {
-        const searchParams = new URLSearchParams(window.location.search);
-        const queryPage = searchParams.get("page");
-        switch (queryPage) {
-            case ("home"): {
-                switchPage(queryPage);
-            } break;
-            case ("about"): {
-                switchPage(queryPage);
-            } break;
-            case ("experience"): {
-                switchPage(queryPage);
-            } break;
-            case ("projects"): {
-                switchPage(queryPage);
-            } break;
-            default: {
-                switchPage("home");
-            } break;
-        }
-    }
-</script>
-<body class="home-page">
-    <div class="header">
-        <h1>Andrew Combs</h1>
-        <h3>
-            Passionate, competent developer across disciplines. 
-            Biomedical engineering, SWE, AI/ML, electromechanical design. 
-            Tackling hard problems for the love of the game.
-        </h3>
-        <h3><a href="https://www.linkedin.com/in/andrew-m-combs/">Linkedin</a> | <a href="https://github.com/iBrushC">Github</a></h3>
+<body class="home">
+    <div class="main-content">
+        <div class="header">
+            <h1>Andrew Combs</h1>
+            <h3>
+                Passionate, competent developer across disciplines. 
+                Biomedical engineering, SWE, AI/ML, electromechanical design. 
+                Tackling hard problems for the love of the game.
+            </h3>
+            <h3><a href="https://www.linkedin.com/in/andrew-m-combs/">Linkedin</a> | <a href="https://github.com/iBrushC">Github</a></h3>
+        </div>
+        <div id="projects-grid">
+        </div>
     </div>
-    <div id="projects-grid">
+    <div class="post-content">
+        <div class="header">
+            <h1 id="post-title">Post Title</h1>
+            <div id="post-image"></div>
+            <p id="post-content">Post Content</p>
+        </div>
     </div>
     <script src="load.js"></script>
+    <script src="page.js"></script>
 </body>
 </html>

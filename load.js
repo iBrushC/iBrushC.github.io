@@ -1,4 +1,8 @@
-const getPost = (postText) => {
+const getPost = async (postName) => {
+    // Fetch the post at each
+    const fetchP = await fetch(`/posts/${postName}.md`);
+    const postText = (await fetchP.text()).replace(/\r/g, "");
+
     // Title
     const titleStart = postText.indexOf("Title: ");
     let title = postText.substring(titleStart + 7);
@@ -53,17 +57,18 @@ const populatePosts = async () => {
 
     // Posts
     let i = posts.length;
-    for (const p of posts) {
-        // Fetch the post at each
-        const fetchP = await fetch(`/posts/${p}.md`);
-        const postText = await fetchP.text();
-
+    for (let p of posts) {
+        p = p.replace(/\r/g, "");
+        
         // Get post attributes
-        const postObj = getPost(postText);
-
+        const postObj = await getPost(p);
+        
         const temp = document.createElement('template');
         temp.innerHTML = `
-        <div class="project slide-up-element" style="animation-delay: calc(0.05*${i}*1s)">
+        <div 
+            class="project slide-up-element" 
+            style="animation-delay: calc(0.05*${i}*1s)"
+        >
             <div class="project-img" style="background: url(media/${postObj.image}) center / cover no-repeat"></div>
             <p class="date">${postObj.date}</p>
             <p class="tags">${postObj.tags}</p>
@@ -75,6 +80,7 @@ const populatePosts = async () => {
         `
 
         // Create the post object
+        temp.content.firstElementChild.onclick = () => switchPage(p);
         grid.insertBefore(temp.content.firstElementChild, grid.firstChild);
         i--;
     }
