@@ -1,7 +1,7 @@
 Title: "Growing" Draw-able Images with RL
 Description: TODO
 Image: eye_gif.gif
-Tags: Internship
+Tags: Project
 Date: September 2022
 Content:
 TODO

@@ -1,7 +1,7 @@
-Title: Fixing Scouting in First Robotics Competition
+Title: A Scouting App for First Robotics Competition
 Description: TODO
-Image: kitware-vtkjs.png
-Tags: Internship
+Image: scouting_app.png
+Tags: Project
 Date: December 2022
 Content:
 TODO
