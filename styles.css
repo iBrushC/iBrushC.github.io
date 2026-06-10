@@ -185,6 +185,7 @@ p {
 }
 
 .post-content-body p {
+    max-width: 60vw;
     font-size: 13pt;
 }
 
@@ -192,4 +193,17 @@ p {
     width: 80vw;
     height: 40vh; max-width: 600px;
     margin-bottom: 2rem;
+}
+
+.post-image {
+    background: url() center / cover no-repeat;
+    width: 80vw;
+    height: 40vh; max-width: 600px;
+    margin-top: 1rem;
+    align-self: center;
+    justify-self: center;
+}
+
+h4 {
+    font-size: 11pt;
 }
