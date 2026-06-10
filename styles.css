@@ -185,7 +185,7 @@ p {
 }
 
 .post-content-body p {
-    max-width: 60vw;
+    max-width: 1000px;
     font-size: 13pt;
 }
 
