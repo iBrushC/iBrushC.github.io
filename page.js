@@ -24,8 +24,10 @@ const switchPage = async (newPage) => {
         // Set content
         const postObj = await getPost(newPage);
         document.getElementById("post-title").innerHTML = postObj.title;
-        document.getElementById("post-image").style = `background: url(media/${postObj.image}) center / cover no-repeat; height: 40vh; max-width: 600px;`;
-        document.getElementById("post-content").innerHTML = postObj.content;
+        document.getElementById("post-desc").innerHTML = postObj.desc;
+        document.getElementById("post-date").innerHTML = postObj.date;
+        document.getElementById("post-image").style.background = `url(media/${postObj.image}) center / cover no-repeat`;
+        document.getElementById("post-body-text").innerHTML = postObj.content;
     }
 }
 
