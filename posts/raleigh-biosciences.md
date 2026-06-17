@@ -1,7 +1,7 @@
 Title: Foundation Models for Raleigh Biosciences
-Description: TODO
+Description: Developing foundational genomics AI for a local startup.
 Image: rbs.png
 Tags: Internship
 Date: July 2023
 Content:
-TODO
+I can't actually talk about this one because I signed an NDA. Sorry.
