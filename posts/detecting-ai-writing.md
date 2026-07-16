@@ -4,6 +4,15 @@ Image: ai_detection.png
 Tags: Project
 Date: July 2026
 Content:
+
+<b>TL;DR</b>: even flagship models with large corpuses can't replicate an authors style. Across 5 authors and 25 essays, stylometry correctly identified the AI 85% of the time.
+
+<br><br>
+
+<a href="https://github.com/iBrushC/linguistic-ai-detection">Source Code (Github)</a>
+
+<br><br>
+
 As of writing this (July 2026), humanity as a whole has widely accepted defeat in detecting AI-written text. We've developed a sixth sense for ticks like over-use of em dashes and specific words ("genuinely", "leverage", and "robust" to name a few), but these are known by readers and users alike, and can be easily removed. It's gotten harder over the years due to the sheer amount of available models: on <a href="https://openrouter.ai/models?output_modalities=text&categories=academia">OpenRouter</a>, a popular access point for providers, there are 49 listed under "academia" alone. To make matters worse, most platforms also include per-user personalizations, where writing styles and vocabulary will change over time as it picks up on the nuances and preferences of whoever’s speaking to it. Last semester I saw someone posting about their chatbot addressing them as "babe" and ending messages with "and that’s the tea".
 
 <br><br>
