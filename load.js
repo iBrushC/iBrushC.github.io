@@ -48,7 +48,7 @@ const getPost = async (postName) => {
 const populatePosts = async () => {
     const fetchPosts = await fetch("/posts/index.txt");
     const postNames = await fetchPosts.text();
-    
+
     // Create a post for all lines
     const posts = postNames.split("\n");
 
@@ -59,14 +59,15 @@ const populatePosts = async () => {
     let i = posts.length;
     for (let p of posts) {
         p = p.replace(/\r/g, "");
-        
+      if (p == "") { continue; }
+
         // Get post attributes
         const postObj = await getPost(p);
-        
+
         const temp = document.createElement('template');
         temp.innerHTML = `
-        <div 
-            class="project slide-up-element" 
+        <div
+            class="project slide-up-element"
             style="animation-delay: calc(0.05*${i}*1s)"
         >
             <div class="project-img" style="background: url(media/${postObj.image}) center / cover no-repeat"></div>
