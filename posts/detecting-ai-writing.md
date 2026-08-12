@@ -1,11 +1,11 @@
 Title: Detecting AI is Hard, Detecting Humans is Easy
-Description: Even well-informed flagship models can't mimic an authors style.
+Description: Even well-informed flagship models can't mimic an author's style.
 Image: ai_detection.png
 Tags: Project
 Date: July 2026
 Content:
 
-<b>TL;DR</b>: even flagship models with large corpuses can't replicate an authors style. Across 5 authors and 25 essays, stylometry correctly identified the AI 85% of the time.
+<b>TL;DR</b>: even flagship models with large corpuses can't replicate an author's style. Across 5 authors and 25 essays, stylometry correctly identified the AI 85% of the time.
 
 <br><br>
 
