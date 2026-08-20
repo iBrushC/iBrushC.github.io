@@ -1,10 +1,17 @@
+// Only add a history entry if we aren't already sitting on that url
+const pushPage = (url) => {
+    if (url.href != window.location.href) {
+        history.pushState(null, '', url);
+    }
+}
+
 const switchPage = async (newPage) => {
     if (newPage == "home") {
         // Search params + history
         if ('URLSearchParams' in window) {
             const url = new URL(window.location);
             url.searchParams.delete("post")
-            history.pushState(null, '', url);
+            pushPage(url);
         }
 
         // Styling
@@ -15,7 +22,7 @@ const switchPage = async (newPage) => {
         if ('URLSearchParams' in window) {
             const url = new URL(window.location);
             url.searchParams.set("post", newPage);
-            history.pushState(null, '', url);
+            pushPage(url);
         }
 
         // Styling
@@ -31,6 +38,13 @@ const switchPage = async (newPage) => {
     }
 }
 
+// The content loads in async, so the browser can't restore scroll itself
+history.scrollRestoration = "manual";
+const scrollKey = () => `scroll:${window.location.search}`;
+window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem(scrollKey(), window.scrollY);
+});
+
 window.onload = async () => {
     const searchParams = new URLSearchParams(window.location.search);
     const queryPage = searchParams.get("post");
@@ -39,6 +53,13 @@ window.onload = async () => {
     }
     else {
         await switchPage(queryPage);
+    }
+
+    // Wait for the grid to fill in before putting the scroll back
+    await postsLoaded;
+    const savedScroll = sessionStorage.getItem(scrollKey());
+    if (savedScroll != null) {
+        window.scrollTo(0, parseFloat(savedScroll));
     }
 }
 

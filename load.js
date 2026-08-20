@@ -49,18 +49,20 @@ const populatePosts = async () => {
     const fetchPosts = await fetch("/posts/index.txt");
     const postNames = await fetchPosts.text();
 
-    // Create a post for all lines
-    const posts = postNames.split("\n");
+    // Create a post for all lines, newest (bottom of index.txt) first so
+    // posts load and fade in from the top down
+    const posts = postNames
+        .split("\n")
+        .map((p) => p.replace(/\r/g, ""))
+        .filter((p) => p != "")
+        .reverse();
 
     // Grid reference
     const grid = document.getElementById("projects-grid");
 
     // Posts
-    let i = posts.length;
-    for (let p of posts) {
-        p = p.replace(/\r/g, "");
-      if (p == "") { continue; }
-
+    let i = 1;
+    for (const p of posts) {
         // Get post attributes
         const postObj = await getPost(p);
 
@@ -82,9 +84,10 @@ const populatePosts = async () => {
 
         // Create the post object
         temp.content.firstElementChild.onclick = () => switchPage(p);
-        grid.insertBefore(temp.content.firstElementChild, grid.firstChild);
-        i--;
+        grid.appendChild(temp.content.firstElementChild);
+        i++;
     }
 }
 
-populatePosts();
+// Exposed so the page can wait for the grid before restoring scroll
+const postsLoaded = populatePosts();
